@@ -35,7 +35,7 @@ const Product = props => {
             <ul className={styles.choices}>
               {props.sizes.map((size) => {
                 return (
-                  <li key={size}>
+                  <li key={size.name}>
                     <button className={clsx(prepareSizeClassName(size), size === currentSize && styles.active)} onClick={(e) => {
                       e.preventDefault();
                       setCurrentSize(size);
