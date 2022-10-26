@@ -2,6 +2,7 @@ import styles from './Product.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import ProductImage from '../ProductImage/ProductImage';
 
 const Product = props => {
 
@@ -12,20 +13,22 @@ const Product = props => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
   }
 
-  const getPrice = (basePrice, additionalPrice) => {
+  const getPrice = props.basePrice + props.sizes.find(s => s.name === currentSize).additionalPrice;
+
+  const addToCard = props => {
     return (
-      basePrice + additionalPrice
+    console.log(`Summary 
+    =============== 
+    Name: ${props.title}
+    Price: ${props.basePrice}
+    Color: ${currentColor}
+    Size: ${currentSize}`)
     )
-  }
+  };
 
   return (
     <article className={styles.product}>
-      <div className={styles.imageContainer}>
-        <img 
-          className={styles.image}
-          alt="Kodilla shirt"
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-${props.name}--${currentColor}.jpg`} />
-      </div>
+      <ProductImage name={props.name} color={currentColor} />
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
@@ -40,7 +43,7 @@ const Product = props => {
                   <li key={size.name}>
                     <button className={clsx((size), size === currentSize && styles.active)} onClick={(e) => {
                       e.preventDefault();
-                      setCurrentSize(size);
+                      setCurrentSize(size.name);
                     }}>{size.name}</button>
                   </li>
                 );
@@ -62,7 +65,10 @@ const Product = props => {
               })}
             </ul>
           </div>
-          <Button className={styles.button}>
+          <Button className={styles.button} onClick={(e) => {
+            e.preventDefault();
+            addToCard(props)
+          }}>
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
