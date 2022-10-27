@@ -6,34 +6,21 @@ import OptionSize from "../OptionSize/OptionSize";
 
 const ProductForm = (props) => {
 
-  const summary = (e) => {
-    e.preventDefault();
-    console.log("Summary: ", props.shoppingSummary);
-    }
     return (
-        <form onSubmit={addToCard}>
-          <div className={styles.sizes}>
-            <h3 className={styles.optionLabel}>Sizes</h3>
-            <ul className={styles.choices}>
-              {props.sizes.map((size) => {
-                return (
-                  <li key={size.name}>
-                    <button className={clsx((size), size === currentSize && styles.active)} onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentSize(size.name);
-                    }}>{size.name}</button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <Button className={styles.button} onClick={(e) => {
-            e.preventDefault();
-            addToCard(props)
-          }}>
-            <span className="fa fa-shopping-cart" />
-          </Button>
-        </form>
+      <form>
+        <OptionSize
+        size={props.size}
+        currentSize={props.currentSize}
+        price={props.basePrice}
+        sizes={props.sizes} />
+        <OptionColor 
+        colors={props.colors} 
+        currentColor={props.currentColor}
+        />
+      <Button type={"submit"} onClick={summary} className={styles.button}>
+        <span className="fa fa-shopping-cart" />
+      </Button>
+      </form>
     );
 }
 
