@@ -1,6 +1,5 @@
 import styles from "./OptionSize.module.scss";
 import clsx from "clsx";
-import {useState} from 'react';
 
 const OptionSize = (props) => {
 
@@ -12,11 +11,9 @@ const OptionSize = (props) => {
         Name: ${props.title}
         Price: ${props.basePrice}
         Color: ${props.currentColor}
-        Size: ${currentSize}`)
+        Size: ${props.currentSize}`)
         )
       };
-
-    const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
 
     return (
         <form onSubmit={addToCard}>
@@ -26,9 +23,9 @@ const OptionSize = (props) => {
             {props.sizes.map((size) => {
               return (
                 <li key={size.name}>
-                  <button className={clsx((size), size === currentSize && styles.active)} onClick={(e) => {
+                  <button className={clsx((size), size === props.currentSize && styles.active)} onClick={(e) => {
                     e.preventDefault();
-                    setCurrentSize(size.name);
+                    props.setCurrentSize(size.name);
                   }}>{size.name}</button>
                 </li>
               );

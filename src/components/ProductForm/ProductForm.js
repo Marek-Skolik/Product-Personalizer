@@ -17,10 +17,10 @@ const ProductForm = (props) => {
         colors={props.colors} 
         currentColor={props.currentColor}
         />
-      <Button type={"submit"} onClick={summary} className={styles.button}>
+        <Button type={"submit"} onSubmit={props.addToCard} className={styles.button}>
         <span className="fa fa-shopping-cart" />
-      </Button>
-      </form>
+        </Button>
+        </form>
     );
 }
 

@@ -1,9 +1,12 @@
 import styles from './Product.module.scss';
-import { useState } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
+import { useState } from 'react';
 
 const Product = props => {
+
+  const [currentColor, setCurrentColor] = useState(props.colors[0]);
+  const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
 
   const getPrice = props.basePrice + props.sizes.find(s => s.name === props.currentSize).additionalPrice;
 
@@ -18,8 +21,10 @@ const Product = props => {
         <ProductForm
          colors={props.colors}
          currentColor={currentColor}
+         setCurrentColor={setCurrentColor}
          size={props.size}
          currentSize={currentSize}
+         setCurrentSize={setCurrentSize}
          onClick={props.onClick}
          sizes={props.sizes}
          />
