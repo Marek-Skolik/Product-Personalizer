@@ -5,22 +5,22 @@ import OptionSize from "../OptionSize/OptionSize";
 
 
 const ProductForm = (props) => {
-
     return (
-      <form>
+      <form onSubmit={props.addToCard}>
         <OptionSize
-        size={props.size}
-        currentSize={props.currentSize}
-        price={props.basePrice}
-        sizes={props.sizes} />
-        <OptionColor 
-        colors={props.colors} 
-        currentColor={props.currentColor}
+          currentSize={props.currentSize}
+          sizes={props.sizes}
+          setCurrentSize={props.setCurrentSize}
         />
-        <Button type={"submit"} onSubmit={props.addToCard} className={styles.button}>
+        <OptionColor 
+          colors={props.colors} 
+          currentColor={props.currentColor}
+          setCurrentColor={props.setCurrentColor}
+        />
+        <Button type={"submit"} className={styles.button}>
         <span className="fa fa-shopping-cart" />
         </Button>
-        </form>
+      </form>
     );
 }
 
